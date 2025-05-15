@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import axios from 'axios'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -16,25 +17,43 @@ import { cn } from "@/lib/utils"
 import { FormFieldRow } from './FormFieldRow'
 import { GENDER_OPTIONS, OCCUPATION_OPTIONS } from './constants'
 
-const EditForm = () => {
+interface EditFormProps {
+  onSave: () => void;
+}
+
+const EditForm = ({ onSave }: EditFormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      gender: "male",
+      gender: "MALE",
       birthday: new Date(),
-      occupation: "Student",
+      occupation: "STUDENT",
       phone: "",
     },
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    const { profileImage, ...rest } = values
-    const formData = {
-      ...rest,
-      ...(profileImage ? { profileImage } : {})
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      const formData = new FormData()
+      const { profileImage, birthday, ...data } = values
+
+      Object.entries(data).forEach(([key, value]) => {
+        formData.append(key, value)
+      })
+
+      formData.append('birthday', birthday.toISOString())
+
+      if (profileImage) {
+        formData.append('profileImage', profileImage)
+      }
+
+      await axios.post('/api/users', formData)
+      form.reset()
+      onSave()
+    } catch (error) {
+      console.error('Error creating user:', error)
     }
-    console.log(formData)
   }
 
   return (

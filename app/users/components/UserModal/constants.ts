@@ -1,12 +1,15 @@
 export const GENDER_OPTIONS = [
-  { value: 'male', label: 'Male' },
-  { value: 'female', label: 'Female' },
-  { value: 'other', label: 'Other' }
-]
+  { value: 'MALE', label: 'Male' },
+  { value: 'FEMALE', label: 'Female' },
+  { value: 'OTHER', label: 'Other' },
+] as const
 
 export const OCCUPATION_OPTIONS = [
-  { value: 'Student', label: 'Student' },
-  { value: 'Engineer', label: 'Engineer' },
-  { value: 'Teacher', label: 'Teacher' },
-  { value: 'Unemployed', label: 'Unemployed' }
-] 
+  { value: 'STUDENT', label: 'Student' },
+  { value: 'ENGINEER', label: 'Engineer' },
+  { value: 'TEACHER', label: 'Teacher' },
+  { value: 'UNEMPLOYED', label: 'Unemployed' },
+] as const
+
+export type Gender = typeof GENDER_OPTIONS[number]['value']
+export type Occupation = typeof OCCUPATION_OPTIONS[number]['value'] 

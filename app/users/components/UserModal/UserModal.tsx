@@ -1,4 +1,6 @@
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -10,8 +12,10 @@ import {
 import EditForm from '@/app/users/components/UserModal/EditForm'
 
 const UserModal = () => {
+  const [open, setOpen] = useState(false)
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline">Edit User</Button>
       </DialogTrigger>
@@ -19,7 +23,7 @@ const UserModal = () => {
         <DialogHeader>
           <DialogTitle>Edit User</DialogTitle>
         </DialogHeader>
-        <EditForm />
+        <EditForm onSave={() => setOpen(false)} />
       </DialogContent>
     </Dialog>
   )

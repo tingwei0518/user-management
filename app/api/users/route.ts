@@ -1,31 +1,72 @@
-import { NextResponse, NextRequest } from "next/server";
-import { prisma } from "@/prisma/client";
-import { userSchema } from "@/app/lib/validation";
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+import { parseForm, saveFile } from '@/app/lib/upload'
+import { prisma } from '@/prisma/client'
+import { mkdir } from 'fs/promises'
+import { uploadDir } from '@/app/lib/upload'
+import { Gender, Occupation } from '@/app/users/components/UserModal/constants'
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+}
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const result = userSchema.safeParse(body);
-    if (!result.success) {
-      return NextResponse.json({ errors: result.error.errors }, { status: 400 });
+    await mkdir(uploadDir, { recursive: true })
+
+    const { fields, files } = await parseForm(request)
+    console.log('Parsed fields:', fields)
+    console.log('Parsed files:', files)
+
+    if (!fields.name || !fields.gender || !fields.birthday || !fields.occupation || !fields.phone) {
+      return NextResponse.json(
+        { error: 'Missing required fields' },
+        { status: 400 }
+      )
     }
-    const { name, phone, gender, birthday, occupation, profileImage } = result.data;
-    const user = await prisma.user.create({
-      data: {
-        name,
-        phone,
-        gender,
-        birthday,
-        occupation,
-        profileImage: profileImage || ''
-      },
-    });
-    return NextResponse.json(user, { status: 201 });
+
+    let profileImage = ''
+    if (files.profileImage) {
+      try {
+        profileImage = await saveFile(files.profileImage)
+        console.log('File saved:', profileImage)
+      } catch (error) {
+        console.error('Error saving file:', error)
+        return NextResponse.json(
+          { error: 'Failed to save file' },
+          { status: 500 }
+        )
+      }
+    }
+
+    try {
+      const user = await prisma.user.create({
+        data: {
+          name: fields.name,
+          gender: fields.gender as Gender,
+          birthday: new Date(fields.birthday),
+          occupation: fields.occupation as Occupation,
+          phone: fields.phone,
+          profileImage: profileImage || '',
+        },
+      })
+      console.log('User created:', user)
+      return NextResponse.json(user)
+    } catch (error) {
+      console.error('Error creating user in database:', error)
+      return NextResponse.json(
+        { error: 'Failed to create user in database', details: error },
+        { status: 500 }
+      )
+    }
   } catch (error) {
+    console.error('Error in POST handler:', error)
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: 'Internal server error', details: error },
       { status: 500 }
-    );
+    )
   }
 }
 
