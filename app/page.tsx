@@ -1,5 +1,10 @@
+import UserModal from "@/components/UserModal/UserModal";
+
 export default function Home() {
   return (
-    <div>User Management Page</div>
+    <>
+      <div>User Management Page</div>
+      <UserModal />
+    </>
   );
 }
