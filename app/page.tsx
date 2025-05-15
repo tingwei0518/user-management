@@ -1,4 +1,4 @@
-import UserModal from "@/components/UserModal/UserModal";
+import UserModal from "@/app/users/components/UserModal/UserModal";
 
 export default function Home() {
   return (
