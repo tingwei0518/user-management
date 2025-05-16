@@ -31,18 +31,7 @@ export const formSchema = z.object({
   phone: z.string()
     .min(1, "Phone number is required")
     .regex(/^(\+886|0)[0-9]{9}$/, "Phone number must be a valid Taiwan phone number"),
-  profileImage: typeof File !== 'undefined'
-    ? z.instanceof(File)
-      .optional()
-      .refine(
-        (file) => !file || file.size <= 5 * 1024 * 1024,
-        "File size should be less than 5MB"
-      )
-      .refine(
-        (file) => !file || ['image/jpeg', 'image/png', 'image/gif'].includes(file.type),
-        "Only .jpg, .png, and .gif formats are supported"
-      )
-    : z.any().optional(),
+  profileImage: z.string().url("Profile image must be a valid URL").optional().or(z.literal('')),
 });
 
 export type FormData = z.infer<typeof formSchema>;

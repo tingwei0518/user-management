@@ -14,8 +14,9 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { formSchema } from "@/app/lib/validation"
 import { cn } from "@/lib/utils"
-import { FormFieldRow } from './FormFieldRow'
-import { GENDER_OPTIONS, OCCUPATION_OPTIONS } from './constants'
+import { FormFieldRow } from '@/app/users/components/UserModal/FormFieldRow'
+import { GENDER_OPTIONS, OCCUPATION_OPTIONS } from '@/app/users/components/UserModal/constants'
+import { ProfileImageUpload } from '@/app/users/components/UserModal/ProfileImageUpload'
 
 interface EditFormProps {
   onSave: () => void;
@@ -30,29 +31,22 @@ const EditForm = ({ onSave }: EditFormProps) => {
       birthday: new Date(),
       occupation: "STUDENT",
       phone: "",
+      profileImage: "",
     },
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const formData = new FormData()
-      const { profileImage, birthday, ...data } = values
-
-      Object.entries(data).forEach(([key, value]) => {
-        formData.append(key, value)
-      })
-
-      formData.append('birthday', birthday.toISOString())
-
-      if (profileImage) {
-        formData.append('profileImage', profileImage)
-      }
-
-      await axios.post('/api/users', formData)
-      form.reset()
-      onSave()
+      const { birthday, ...data } = values;
+      const payload = {
+        ...data,
+        birthday: birthday.toISOString(),
+      };
+      await axios.post('/api/users', payload);
+      form.reset();
+      onSave();
     } catch (error) {
-      console.error('Error creating user:', error)
+      console.error('Error creating user:', error);
     }
   }
 
@@ -166,18 +160,13 @@ const EditForm = ({ onSave }: EditFormProps) => {
         <FormField
           control={form.control}
           name="profileImage"
-          render={({ field: { value, onChange, ...field } }) => (
+          render={({ field: { value, onChange } }) => (
             <FormItem>
               <FormFieldRow label="Profile Image">
                 <FormControl>
-                  <Input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => {
-                      const file = e.target.files?.[0]
-                      onChange(file)
-                    }}
-                    {...field}
+                  <ProfileImageUpload
+                    value={value || ''}
+                    onChange={onChange}
                   />
                 </FormControl>
               </FormFieldRow>

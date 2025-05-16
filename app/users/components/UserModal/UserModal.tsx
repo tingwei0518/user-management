@@ -12,18 +12,18 @@ import {
 import EditForm from '@/app/users/components/UserModal/EditForm'
 
 const UserModal = () => {
-  const [open, setOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={isOpen} onOpenChange={setIsOpen} modal={false}>
       <DialogTrigger asChild>
-        <Button variant="outline">Edit User</Button>
+        <Button variant="default">Edit User</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px]" onInteractOutside={(event) => { event.preventDefault() }}>
         <DialogHeader>
           <DialogTitle>Edit User</DialogTitle>
         </DialogHeader>
-        <EditForm onSave={() => setOpen(false)} />
+        <EditForm onSave={() => setIsOpen(false)} />
       </DialogContent>
     </Dialog>
   )
