@@ -15,7 +15,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { formSchema } from "@/app/lib/validation"
 import { cn } from "@/lib/utils"
 import { FormFieldRow } from '@/app/users/components/UserModal/FormFieldRow'
-import { GENDER_OPTIONS, OCCUPATION_OPTIONS } from '@/app/users/components/UserModal/constants'
+import { Gender, Occupation, GENDER_LABELS, OCCUPATION_LABELS } from '@/app/types/enums'
 import { ProfileImageUpload } from '@/app/users/components/UserModal/ProfileImageUpload'
 
 interface EditFormProps {
@@ -27,9 +27,9 @@ const EditForm = ({ onSave }: EditFormProps) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      gender: "MALE",
+      gender: Gender.MALE,
       birthday: new Date(),
-      occupation: "STUDENT",
+      occupation: Occupation.STUDENT,
       phone: "",
       profileImage: "",
     },
@@ -79,10 +79,10 @@ const EditForm = ({ onSave }: EditFormProps) => {
                     defaultValue={field.value}
                     className="flex space-x-4"
                   >
-                    {GENDER_OPTIONS.map(({ value, label }) => (
+                    {Object.values(Gender).map((value) => (
                       <div key={value} className="flex items-center space-x-2">
                         <RadioGroupItem value={value} id={value} />
-                        <FormLabel htmlFor={value}>{label}</FormLabel>
+                        <FormLabel htmlFor={value}>{GENDER_LABELS[value]}</FormLabel>
                       </div>
                     ))}
                   </RadioGroup>
@@ -132,8 +132,8 @@ const EditForm = ({ onSave }: EditFormProps) => {
                       <SelectValue placeholder="Select an occupation" />
                     </SelectTrigger>
                     <SelectContent>
-                      {OCCUPATION_OPTIONS.map(({ value, label }) => (
-                        <SelectItem key={value} value={value}>{label}</SelectItem>
+                      {Object.values(Occupation).map((value) => (
+                        <SelectItem key={value} value={value}>{OCCUPATION_LABELS[value]}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>

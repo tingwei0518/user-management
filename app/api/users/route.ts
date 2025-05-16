@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { prisma } from '@/prisma/client'
-import { Gender, Occupation } from '@/app/users/components/UserModal/constants'
+import { Gender, Occupation } from '@/app/types/enums'
 
 export async function POST(request: NextRequest) {
   try {
