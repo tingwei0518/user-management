@@ -2,6 +2,7 @@ import React from 'react'
 import { PaginationWithLinks } from '@/components/ui/pagination-with-links';
 import { prisma } from '@/prisma/client';
 import SearchBar from '@/app/users/components/userLists/SearchBar';
+import UserDisplay from '@/app/users/components/userLists/UserDisplay';
 import { Gender, Occupation } from '@/app/types/enums';
 
 interface UserListsProps {
@@ -42,11 +43,7 @@ const UserLists = async ({ searchParams }: UserListsProps) => {
       <div className="flex-1 min-h-0 overflow-y-auto p-6">
         <SearchBar />
         <div className="space-y-4">
-          {users.map(({ id, name }) => (
-            <div key={id}>
-              <h2>{name}</h2>
-            </div>
-          ))}
+          <UserDisplay users={users} />
         </div>
       </div>
       <div className="flex-shrink-0 p-4 border-t bg-background h-[73px]">
