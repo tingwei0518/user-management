@@ -37,12 +37,7 @@ const EditForm = ({ onSave }: EditFormProps) => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const { birthday, ...data } = values;
-      const payload = {
-        ...data,
-        birthday: birthday.toISOString(),
-      };
-      await axios.post('/api/users', payload);
+      await axios.post('/api/users', values);
       form.reset();
       onSave();
     } catch (error) {

@@ -12,7 +12,7 @@ export const userSchema = z.object({
   occupation: z.nativeEnum(Occupation, {
     errorMap: () => ({ message: "Invalid occupation type" })
   }),
-  profileImage: z.string().url("Profile image must be a valid URL").nullish(),
+  profileImage: z.string().url("Profile image must be a valid URL").optional().or(z.literal('')),
 });
 
 export const formSchema = z.object({

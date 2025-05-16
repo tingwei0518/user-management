@@ -1,44 +1,32 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { prisma } from '@/prisma/client'
-import { Gender, Occupation } from '@/app/types/enums'
+import { userSchema } from '@/app/lib/validation'
 
 export async function POST(request: NextRequest) {
   try {
-    const data = await request.json()
-
-    if (!data.name || !data.gender || !data.birthday || !data.occupation || !data.phone) {
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
-      )
+    const body = await request.json();
+    const result = userSchema.safeParse(body);
+    if (!result.success) {
+      return NextResponse.json({ errors: result.error.errors }, { status: 400 });
     }
 
-    try {
-      const user = await prisma.user.create({
-        data: {
-          name: data.name,
-          gender: data.gender as Gender,
-          birthday: new Date(data.birthday),
-          occupation: data.occupation as Occupation,
-          phone: data.phone,
-          profileImage: data.profileImage || '',
-        },
-      })
-      return NextResponse.json(user, { status: 201 })
-    } catch (error) {
-      console.error('Error creating user in database:', error)
-      return NextResponse.json(
-        { error: 'Failed to create user in database', details: error },
-        { status: 500 }
-      )
-    }
+    const { name, phone, gender, birthday, occupation, profileImage } = result.data;
+    const user = await prisma.user.create({
+      data: {
+        name,
+        phone,
+        gender,
+        birthday: new Date(birthday),
+        occupation,
+        profileImage: profileImage || ''
+      }
+    });
+    return NextResponse.json(user, { status: 201 });
   } catch (error) {
-    console.error('Error in POST handler:', error)
     return NextResponse.json(
-      { error: 'Internal server error', details: error },
+      { error: "Internal server error" },
       { status: 500 }
-    )
+    );
   }
 }
-
