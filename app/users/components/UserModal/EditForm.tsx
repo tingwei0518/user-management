@@ -14,9 +14,9 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { formSchema } from "@/app/lib/validation"
 import { cn } from "@/lib/utils"
-import { FormFieldRow } from '@/app/users/components/UserModal/FormFieldRow'
+import { FormFieldRow } from '@/app/users/components/userModal/FormFieldRow'
 import { Gender, Occupation, GENDER_LABELS, OCCUPATION_LABELS } from '@/app/types/enums'
-import { ProfileImageUpload } from '@/app/users/components/UserModal/ProfileImageUpload'
+import { ProfileImageUpload } from '@/app/users/components/userModal/ProfileImageUpload'
 
 interface EditFormProps {
   onSave: () => void;

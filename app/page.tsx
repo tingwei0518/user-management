@@ -1,10 +1,20 @@
-import UserModal from "@/app/users/components/UserModal/UserModal";
+import UserModal from "@/app/users/components/userModal/UserModal";
+import UserLists from "@/app/users/components/userLists/UserLists";
 
-export default function Home() {
+interface HomeProps {
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
+export default function Home({ searchParams }: HomeProps) {
   return (
-    <>
-      <div>User Management Page</div>
-      <UserModal />
-    </>
+    <div className="flex flex-col h-screen">
+      <div className="flex items-center justify-between p-6 border-b">
+        <h1 className="text-2xl font-semibold">User Management</h1>
+        <UserModal />
+      </div>
+      <div className="flex-1 h-[calc(100vh-88px)]">
+        <UserLists searchParams={searchParams} />
+      </div>
+    </div>
   );
 }
