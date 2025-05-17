@@ -4,6 +4,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { CardListsProps } from '@/app/users/components/userLists/UserDisplay'
 import UserActionButtons from '@/app/users/components/userLists/UserActionButtons'
+import { OCCUPATION_LABELS, GENDER_LABELS } from '@/app/types/enums'
 
 export const CardView = ({ users }: CardListsProps) => {
   return (
@@ -24,12 +25,16 @@ export const CardView = ({ users }: CardListsProps) => {
               </Avatar>
               <div className="text-center w-full">
                 <p className="font-medium text-lg">{name}</p>
-                <p className="text-sm text-muted-foreground">{gender}</p>
+                <p className="text-sm text-muted-foreground">
+                  {GENDER_LABELS[gender as keyof typeof GENDER_LABELS]}
+                </p>
                 <p className="text-sm text-muted-foreground flex items-center gap-1 justify-center">
                   <Cake className="w-4 h-4" />
-                  {birthday.toLocaleDateString()}
+                  {birthday?.toLocaleDateString()}
                 </p>
-                <p className="text-sm text-muted-foreground">{occupation}</p>
+                <p className="text-sm text-muted-foreground">
+                  {OCCUPATION_LABELS[occupation as keyof typeof OCCUPATION_LABELS]}
+                </p>
                 <p className="text-sm text-muted-foreground">{phone}</p>
               </div>
             </CardContent>

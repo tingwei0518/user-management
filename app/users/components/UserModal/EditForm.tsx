@@ -9,15 +9,15 @@ import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 import { Input } from "@/components/ui/input"
+import { cn } from "@/lib/utils"
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form"
 import { Button } from "@/components/ui/button"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { formSchema } from "@/app/lib/validation"
-import { cn } from "@/lib/utils"
 import { FormFieldRow } from '@/app/users/components/userModal/FormFieldRow'
-import { Gender, Occupation, GENDER_LABELS, OCCUPATION_LABELS } from '@/app/types/enums'
 import { ProfileImageUpload } from '@/app/users/components/userModal/ProfileImageUpload'
+import { Gender, Occupation, GENDER_LABELS, OCCUPATION_LABELS } from '@/app/types/enums'
 import { User } from '@/app/types/user'
 
 interface EditFormProps {
@@ -95,14 +95,14 @@ const EditForm = ({ onClose, userData }: EditFormProps) => {
         <FormField
           control={form.control}
           name="gender"
-          render={({ field }) => (
+          render={({ field: { onChange, value } }) => (
             <FormItem>
               <FormFieldRow label="Gender">
                 <FormControl>
                   <RadioGroup
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    value={field.value}
+                    onValueChange={onChange}
+                    defaultValue={value}
+                    value={value}
                     className="flex space-x-4"
                   >
                     {Object.values(Gender).map((value) => (
@@ -121,13 +121,13 @@ const EditForm = ({ onClose, userData }: EditFormProps) => {
         <FormField
           control={form.control}
           name="birthday"
-          render={({ field }) => (
+          render={({ field: { onChange, value } }) => (
             <FormItem>
               <FormFieldRow label="Birthday">
                 <FormControl>
                   <DatePicker
-                    selected={field.value}
-                    onChange={field.onChange}
+                    selected={value}
+                    onChange={onChange}
                     dateFormat="yyyy/MM/dd"
                     maxDate={new Date()}
                     placeholderText="YYYY/MM/DD"
@@ -149,34 +149,44 @@ const EditForm = ({ onClose, userData }: EditFormProps) => {
         <FormField
           control={form.control}
           name="occupation"
-          render={({ field }) => (
-            <FormItem>
-              <FormFieldRow label="Occupation">
-                <FormControl>
-                  <Select onValueChange={field.onChange} defaultValue={field.value} value={field.value}>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select an occupation" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {Object.values(Occupation).map((value) => (
-                        <SelectItem key={value} value={value}>{OCCUPATION_LABELS[value]}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-              </FormFieldRow>
-            </FormItem>
-          )}
+          render={({ field: { onChange, value } }) => {
+            const occupationValue = value || Occupation.STUDENT;
+            return (
+              <FormItem>
+                <FormFieldRow label="Occupation">
+                  <FormControl>
+                    <Select
+                      onValueChange={(newValue) => {
+                        if (Object.values(Occupation).includes(newValue as Occupation)) {
+                          onChange(newValue);
+                        }
+                      }}
+                      value={occupationValue}
+                    >
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select an occupation" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {Object.values(Occupation).map((value) => (
+                          <SelectItem key={value} value={value}>{OCCUPATION_LABELS[value]}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                </FormFieldRow>
+              </FormItem>
+            );
+          }}
         />
 
         <FormField
           control={form.control}
           name="phone"
-          render={({ field }) => (
+          render={({ field: { onChange, value } }) => (
             <FormItem>
               <FormFieldRow label="Phone">
                 <FormControl>
-                  <Input type="tel" placeholder="Enter your phone number" {...field} />
+                  <Input type="tel" placeholder="Enter your phone number" onChange={onChange} value={value} />
                 </FormControl>
               </FormFieldRow>
             </FormItem>

@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { CardListsProps } from '@/app/users/components/userLists/UserDisplay';
 import UserActionButtons from '@/app/users/components/userLists/UserActionButtons';
+import { OCCUPATION_LABELS, GENDER_LABELS } from '@/app/types/enums';
 
 export const TableView = ({ users }: CardListsProps) => {
   return (
@@ -23,9 +24,13 @@ export const TableView = ({ users }: CardListsProps) => {
             return (
               <tr key={id} className="hover:bg-gray-50 border-b">
                 <td className="px-4 py-4 font-medium">{name}</td>
-                <td className="px-4 py-4 capitalize">{gender}</td>
+                <td className="px-4 py-4 capitalize">
+                  {GENDER_LABELS[gender as keyof typeof GENDER_LABELS]}
+                </td>
                 <td className="px-4 py-4">{birthday.toLocaleDateString()}</td>
-                <td className="px-4 py-4 capitalize">{occupation}</td>
+                <td className="px-4 py-4 capitalize">
+                  {OCCUPATION_LABELS[occupation as keyof typeof OCCUPATION_LABELS]}
+                </td>
                 <td className="px-4 py-4">{phone}</td>
                 <td className="px-4 py-4 text-right">
                   <UserActionButtons userData={user} />

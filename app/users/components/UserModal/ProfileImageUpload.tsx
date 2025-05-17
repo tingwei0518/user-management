@@ -17,6 +17,9 @@ export const ProfileImageUpload = ({ value, onChange }: ProfileImageUploadProps)
           <Image
             src={value}
             alt="Profile"
+            width={96}
+            height={96}
+            loading="eager"
             className="w-full h-full object-cover rounded-full border border-border shadow-sm"
           />
         ) : (
