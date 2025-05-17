@@ -9,7 +9,7 @@ import { CardView } from '@/app/users/components/userLists/CardView'
 import { TableView } from '@/app/users/components/userLists/TableView'
 import SearchBar from '@/app/users/components/userLists/SearchBar'
 
-interface User {
+export interface User {
   id: number
   name: string
   phone: string

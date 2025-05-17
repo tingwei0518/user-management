@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { CardListsProps } from '@/app/users/components/userLists/UserDisplay';
+import UserActionButtons from '@/app/users/components/userLists/UserActionButtons';
 
 export const TableView = ({ users }: CardListsProps) => {
   return (
@@ -13,18 +14,25 @@ export const TableView = ({ users }: CardListsProps) => {
             <th className="text-left px-4 py-3 text-gray-700 font-medium">Birthday</th>
             <th className="text-left px-4 py-3 text-gray-700 font-medium">Occupation</th>
             <th className="text-left px-4 py-3 text-gray-700 font-medium">Phone</th>
+            <th className="text-right px-4 py-3 text-gray-700 font-medium">Actions</th>
           </tr>
         </thead>
         <tbody>
-          {users.map(({ id, name, phone, gender, occupation, birthday }) => (
-            <tr key={id} className="hover:bg-gray-50 border-b">
-              <td className="px-4 py-4 font-medium">{name}</td>
-              <td className="px-4 py-4 capitalize">{gender}</td>
-              <td className="px-4 py-4">{birthday.toLocaleDateString()}</td>
-              <td className="px-4 py-4 capitalize">{occupation}</td>
-              <td className="px-4 py-4">{phone}</td>
-            </tr>
-          ))}
+          {users.map((user) => {
+            const { id, name, phone, gender, occupation, birthday } = user
+            return (
+              <tr key={id} className="hover:bg-gray-50 border-b">
+                <td className="px-4 py-4 font-medium">{name}</td>
+                <td className="px-4 py-4 capitalize">{gender}</td>
+                <td className="px-4 py-4">{birthday.toLocaleDateString()}</td>
+                <td className="px-4 py-4 capitalize">{occupation}</td>
+                <td className="px-4 py-4">{phone}</td>
+                <td className="px-4 py-4 text-right">
+                  <UserActionButtons user={user} />
+                </td>
+              </tr>
+            )
+          })}
         </tbody>
       </table>
     </ScrollArea>
