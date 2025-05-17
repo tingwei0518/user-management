@@ -7,6 +7,7 @@ import {
 } from '@/components/ui/tabs'
 import { CardView } from '@/app/users/components/userLists/CardView'
 import { TableView } from '@/app/users/components/userLists/TableView'
+import SearchBar from '@/app/users/components/userLists/SearchBar'
 
 interface User {
   id: number
@@ -24,23 +25,34 @@ export interface CardListsProps {
 
 const UserDisplay = ({ users }: CardListsProps) => {
   return (
-    <Tabs defaultValue="card" className="w-full">
-      <TabsList className="mb-4">
-        <TabsTrigger value="card">
-          Card View
-        </TabsTrigger>
-        <TabsTrigger value="table">
-          Table View
-        </TabsTrigger>
-      </TabsList>
+    <div className="pb-4 bg-white rounded-lg border border-gray-200 overflow-hidden w-full h-full flex flex-col">
+      <Tabs defaultValue="card" className="flex flex-col h-full relative">
+        <div className="sticky top-0 left-0 right-0 bg-white z-10 border-b py-3 px-4">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex-1 max-w-md">
+              <SearchBar />
+            </div>
+            <TabsList>
+              <TabsTrigger value="card">
+                Card View
+              </TabsTrigger>
+              <TabsTrigger value="table">
+                Table View
+              </TabsTrigger>
+            </TabsList>
+          </div>
+        </div>
 
-      <TabsContent value="card">
-        <CardView users={users} />
-      </TabsContent>
-      <TabsContent value="table">
-        <TableView users={users} />
-      </TabsContent>
-    </Tabs>
+        <div className="flex-1 overflow-y-auto">
+          <TabsContent value="card" className="p-4 h-full">
+            <CardView users={users} />
+          </TabsContent>
+          <TabsContent value="table" className="p-4 h-full">
+            <TableView users={users} />
+          </TabsContent>
+        </div>
+      </Tabs>
+    </div>
   )
 }
 

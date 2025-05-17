@@ -4,25 +4,25 @@ import { CardListsProps } from '@/app/users/components/userLists/UserDisplay';
 
 export const TableView = ({ users }: CardListsProps) => {
   return (
-    <ScrollArea className="h-[400px] rounded-md border p-2">
+    <ScrollArea className="h-[400px] rounded-md border p-2 bg-white">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b text-muted-foreground">
-            <th className="text-left px-2 pt-2 pb-4">Name</th>
-            <th className="text-left px-2 pt-2 pb-4">Gender</th>
-            <th className="text-left px-2 pt-2 pb-4">Birthday</th>
-            <th className="text-left px-2 pt-2 pb-4">Occupation</th>
-            <th className="text-left px-2 pt-2 pb-4">Phone</th>
+          <tr className="border-b bg-gray-50">
+            <th className="text-left px-4 py-3 text-gray-700 font-medium">Name</th>
+            <th className="text-left px-4 py-3 text-gray-700 font-medium">Gender</th>
+            <th className="text-left px-4 py-3 text-gray-700 font-medium">Birthday</th>
+            <th className="text-left px-4 py-3 text-gray-700 font-medium">Occupation</th>
+            <th className="text-left px-4 py-3 text-gray-700 font-medium">Phone</th>
           </tr>
         </thead>
         <tbody>
           {users.map(({ id, name, phone, gender, occupation, birthday }) => (
-            <tr key={id} className="hover:bg-muted border-b">
-              <td className="px-2 py-4">{name}</td>
-              <td className="px-2 py-4 capitalize">{gender}</td>
-              <td className="px-2 py-4">{birthday.toLocaleDateString()}</td>
-              <td className="px-2 py-4 capitalize">{occupation}</td>
-              <td className="px-2 py-4">{phone}</td>
+            <tr key={id} className="hover:bg-gray-50 border-b">
+              <td className="px-4 py-4 font-medium">{name}</td>
+              <td className="px-4 py-4 capitalize">{gender}</td>
+              <td className="px-4 py-4">{birthday.toLocaleDateString()}</td>
+              <td className="px-4 py-4 capitalize">{occupation}</td>
+              <td className="px-4 py-4">{phone}</td>
             </tr>
           ))}
         </tbody>

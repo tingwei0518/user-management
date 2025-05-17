@@ -8,15 +8,15 @@ export const CardView = ({ users }: CardListsProps) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       {users.map(({ id, name, profileImage, phone, gender, occupation, birthday }) => (
-        <Card key={id}>
-          <CardContent className="px-4 flex flex-col items-center space-y-4">
-            <Avatar className="h-30 w-30">
+        <Card key={id} className="bg-white border border-gray-200">
+          <CardContent className="px-4 py-5 flex flex-col items-center space-y-4">
+            <Avatar className="h-30 w-30 border border-gray-100">
               <AvatarImage src={profileImage} alt={name} className="object-cover" />
               <AvatarFallback>
                 <UserIcon className="w-10 h-10 text-muted-foreground" />
               </AvatarFallback>
             </Avatar>
-            <div className="text-center">
+            <div className="text-center w-full">
               <p className="font-medium text-lg">{name}</p>
               <p className="text-sm text-muted-foreground">{gender}</p>
               <p className="text-sm text-muted-foreground flex items-center gap-1 justify-center">
