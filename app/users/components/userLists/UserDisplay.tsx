@@ -6,14 +6,14 @@ import {
   TabsContent,
 } from '@/components/ui/tabs'
 import { CardView } from '@/app/users/components/userLists/CardView'
-// import { TableView } from '@/app/users/components/userLists/TableView'
+import { TableView } from '@/app/users/components/userLists/TableView'
 
 interface User {
   id: number
   name: string
   phone: string
   profileImage: string
-  // birthday: string
+  birthday: Date
   gender: string
   occupation: string
 }
@@ -38,7 +38,7 @@ const UserDisplay = ({ users }: CardListsProps) => {
         <CardView users={users} />
       </TabsContent>
       <TabsContent value="table">
-        {/* <TableView users={users} /> */}
+        <TableView users={users} />
       </TabsContent>
     </Tabs>
   )

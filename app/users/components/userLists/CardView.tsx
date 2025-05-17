@@ -1,4 +1,5 @@
 import React from 'react'
+import { Cake, User as UserIcon } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { CardListsProps } from '@/app/users/components/userLists/UserDisplay'
@@ -6,19 +7,24 @@ import { CardListsProps } from '@/app/users/components/userLists/UserDisplay'
 export const CardView = ({ users }: CardListsProps) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-      {users.map(({ id, name, profileImage, phone, gender, occupation }) => (
+      {users.map(({ id, name, profileImage, phone, gender, occupation, birthday }) => (
         <Card key={id}>
-          <CardContent className="p-4 flex flex-col items-center space-y-4">
-            <Avatar className="h-16 w-16">
-              <AvatarImage src={profileImage} alt={name} />
-              <AvatarFallback>{name.charAt(0)}</AvatarFallback>
+          <CardContent className="px-4 flex flex-col items-center space-y-4">
+            <Avatar className="h-30 w-30">
+              <AvatarImage src={profileImage} alt={name} className="object-cover" />
+              <AvatarFallback>
+                <UserIcon className="w-10 h-10 text-muted-foreground" />
+              </AvatarFallback>
             </Avatar>
             <div className="text-center">
               <p className="font-medium text-lg">{name}</p>
-              <p className="text-sm text-muted-foreground">{phone}</p>
-              {/* <p className="text-sm text-muted-foreground">{birthday}</p> */}
               <p className="text-sm text-muted-foreground">{gender}</p>
+              <p className="text-sm text-muted-foreground flex items-center gap-1 justify-center">
+                <Cake className="w-4 h-4" />
+                {birthday.toLocaleDateString()}
+              </p>
               <p className="text-sm text-muted-foreground">{occupation}</p>
+              <p className="text-sm text-muted-foreground">{phone}</p>
             </div>
           </CardContent>
         </Card>
