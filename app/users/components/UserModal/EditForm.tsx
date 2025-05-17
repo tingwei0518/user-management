@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'sonner';
 import { useForm } from 'react-hook-form';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -75,10 +76,12 @@ const EditForm = ({ onClose, userData }: EditFormProps) => {
         params.set('page', '1');
         replace(`${pathname}?${params.toString()}`);
       }
+      toast.success('User saved successfully');
       form.reset();
       onClose();
     } catch (error) {
       console.error('Error saving user:', error);
+      toast.error('Failed to save user');
     }
   }
 

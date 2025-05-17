@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Edit, Trash2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import DeleteConfirmation from '@/app/users/components/userLists/DeleteConfirmation';
 import FormModal from '@/app/users/components/userModal/FormModal';
@@ -23,9 +24,15 @@ export const UserActionButtons = ({ userData }: UserActionButtonsProps) => {
   };
 
   const confirmDelete = async () => {
-    await axios.delete(`/api/users/${userId}`);
-    setIsDeleteModalOpen(false);
-    refresh();
+    try {
+      await axios.delete(`/api/users/${userId}`);
+      toast.success('Deleted user successfully');
+      setIsDeleteModalOpen(false);
+      refresh();
+    } catch (error) {
+      toast.error('Failed to delete user');
+      console.error(error);
+    }
   };
 
   const handleEdit = () => {
