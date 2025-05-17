@@ -8,7 +8,7 @@ interface FormFieldRowProps {
 
 export const FormFieldRow = ({ label, children }: FormFieldRowProps) => (
   <div className="grid grid-cols-4 items-center gap-4">
-    <FormLabel>{label}</FormLabel>
+    <FormLabel className="form-field-label">{label}</FormLabel>
     <div className="col-span-3">
       {children}
       <FormMessage />

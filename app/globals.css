@@ -122,7 +122,7 @@
   }
 }
 
-/* DatePicker container styles */
+/* DatePicker container */
 .react-datepicker-wrapper,
 .react-datepicker__input-container {
   width: 100% !important;
@@ -158,11 +158,27 @@
   border-radius: 0.375rem;
 }
 
-/* Cloudinary Widget 樣式 */
+/* Cloudinary Widget */
 .cloudinary-widget {
   z-index: 9999 !important;
 }
 
 iframe.cloudinary-widget {
   background: transparent !important;
+}
+
+/* Modal */
+.user-modal-container [data-slot="card-title"] {
+  font-weight: 500 !important;
+  font-size: 1.125rem !important;
+  line-height: 1.25 !important;
+  text-align: left !important;
+}
+
+.user-modal-container .form-field-label {
+  text-align: left !important;
+}
+
+.user-modal-container .text-muted-foreground {
+  text-align: left !important;
 }
