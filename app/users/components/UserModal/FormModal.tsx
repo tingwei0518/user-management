@@ -1,15 +1,10 @@
-'use client'
+'use client';
 
-import React from 'react'
-import { XIcon } from "lucide-react"
-import EditForm from '@/app/users/components/userModal/EditForm'
-import { User } from '@/app/types/user'
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import React from 'react';
+import { XIcon } from 'lucide-react';
+import EditForm from '@/app/users/components/userModal/EditForm';
+import { User } from '@/app/types/user';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface FormModalProps {
   isOpen: boolean;
@@ -24,11 +19,7 @@ const FormModal = ({ isOpen, onClose, userData }: FormModalProps) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto user-modal-container">
-      <div
-        className="fixed inset-0 bg-black/50"
-        onClick={onClose}
-        aria-hidden="true"
-      />
+      <div className="fixed inset-0 bg-black/50" onClick={onClose} aria-hidden="true" />
       <Card
         className="relative w-full max-w-[425px] shadow-lg z-50 animate-in fade-in-0 zoom-in-95 duration-200 py-6"
         onClick={(e) => e.stopPropagation()}
@@ -44,14 +35,11 @@ const FormModal = ({ isOpen, onClose, userData }: FormModalProps) => {
           <CardTitle>{isEditMode ? 'Edit User' : 'Create User'}</CardTitle>
         </CardHeader>
         <CardContent className="pt-4">
-          <EditForm
-            userData={userData}
-            onClose={onClose}
-          />
+          <EditForm userData={userData} onClose={onClose} />
         </CardContent>
       </Card>
     </div>
   );
 };
 
-export default FormModal 
+export default FormModal;

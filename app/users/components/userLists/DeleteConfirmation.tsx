@@ -1,14 +1,14 @@
-'use client'
+'use client';
 
-import React from 'react'
+import React from 'react';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogFooter,
-} from "@/components/ui/dialog"
-import { Button } from '@/components/ui/button'
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
 
 interface DeleteConfirmationProps {
   isOpen: boolean;
@@ -28,7 +28,9 @@ const DeleteConfirmation = ({ isOpen, onClose, onConfirm, userName }: DeleteConf
           <p>Are you sure you want to delete the user: {userName}?</p>
         </div>
         <DialogFooter>
-          <Button variant="outline" onClick={onClose}>Cancel</Button>
+          <Button variant="outline" onClick={onClose}>
+            Cancel
+          </Button>
           <Button
             variant="destructive"
             onClick={() => {
@@ -41,7 +43,7 @@ const DeleteConfirmation = ({ isOpen, onClose, onConfirm, userName }: DeleteConf
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default DeleteConfirmation 
+export default DeleteConfirmation;

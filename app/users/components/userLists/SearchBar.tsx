@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import React from 'react'
+import React from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Input } from '@/components/ui/input';
@@ -35,6 +35,6 @@ const SearchBar = () => {
       />
     </div>
   );
-}
+};
 
 export default SearchBar;

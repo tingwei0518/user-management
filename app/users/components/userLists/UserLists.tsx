@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { PaginationWithLinks } from '@/components/ui/pagination-with-links';
 import { prisma } from '@/prisma/client';
 import UserDisplay from '@/app/users/components/userLists/UserDisplay';
@@ -19,11 +19,18 @@ const UserLists = async ({ searchParams }: UserListsProps) => {
     OR: [
       { name: { contains: query } },
       { phone: { contains: query } },
-      { gender: query.toUpperCase() in Gender ? { equals: query.toUpperCase() as Gender } : undefined },
-      { occupation: query.toUpperCase() in Occupation ? { equals: query.toUpperCase() as Occupation } : undefined },
+      {
+        gender:
+          query.toUpperCase() in Gender ? { equals: query.toUpperCase() as Gender } : undefined,
+      },
+      {
+        occupation:
+          query.toUpperCase() in Occupation
+            ? { equals: query.toUpperCase() as Occupation }
+            : undefined,
+      },
     ].filter(Boolean),
   };
-
 
   const [users, total] = await Promise.all([
     prisma.user.findMany({
@@ -34,7 +41,7 @@ const UserLists = async ({ searchParams }: UserListsProps) => {
       skip,
       take: PER_PAGE,
     }),
-    prisma.user.count({ where: whereConditions })
+    prisma.user.count({ where: whereConditions }),
   ]);
 
   return (
@@ -43,10 +50,12 @@ const UserLists = async ({ searchParams }: UserListsProps) => {
         <UserDisplay users={users} />
       </div>
       <div className="flex-none p-4 border-t bg-white">
-        {total > 0 && <PaginationWithLinks page={currentPage} totalCount={total} pageSize={PER_PAGE} />}
+        {total > 0 && (
+          <PaginationWithLinks page={currentPage} totalCount={total} pageSize={PER_PAGE} />
+        )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default UserLists
+export default UserLists;

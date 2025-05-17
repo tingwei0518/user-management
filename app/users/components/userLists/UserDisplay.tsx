@@ -1,17 +1,12 @@
-import React from 'react'
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from '@/components/ui/tabs'
-import { CardView } from '@/app/users/components/userLists/CardView'
-import { TableView } from '@/app/users/components/userLists/TableView'
-import SearchBar from '@/app/users/components/userLists/SearchBar'
-import { User } from '@/app/types/user'
+import React from 'react';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { CardView } from '@/app/users/components/userLists/CardView';
+import { TableView } from '@/app/users/components/userLists/TableView';
+import SearchBar from '@/app/users/components/userLists/SearchBar';
+import { User } from '@/app/types/user';
 
 export interface CardListsProps {
-  users: User[]
+  users: User[];
 }
 
 const UserDisplay = ({ users }: CardListsProps) => {
@@ -24,12 +19,8 @@ const UserDisplay = ({ users }: CardListsProps) => {
               <SearchBar />
             </div>
             <TabsList>
-              <TabsTrigger value="card">
-                Card View
-              </TabsTrigger>
-              <TabsTrigger value="table">
-                Table View
-              </TabsTrigger>
+              <TabsTrigger value="card">Card View</TabsTrigger>
+              <TabsTrigger value="table">Table View</TabsTrigger>
             </TabsList>
           </div>
         </div>
@@ -44,7 +35,7 @@ const UserDisplay = ({ users }: CardListsProps) => {
         </div>
       </Tabs>
     </div>
-  )
-}
+  );
+};
 
-export default UserDisplay
+export default UserDisplay;

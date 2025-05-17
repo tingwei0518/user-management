@@ -21,7 +21,7 @@
 }
 
 /* 確保下拉菜單等元素也使用一致的樣式 */
-.modal-container [data-slot="select-value"],
-.modal-container [data-slot="select-item"] {
+.modal-container [data-slot='select-value'],
+.modal-container [data-slot='select-item'] {
   font-size: 0.875rem !important;
 }

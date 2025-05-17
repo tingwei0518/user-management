@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { type ReactNode, useCallback } from "react";
+import { type ReactNode, useCallback } from 'react';
 import {
   Pagination,
   PaginationContent,
@@ -9,10 +9,10 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "./pagination";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { cn } from "@/lib/utils";
+} from './pagination';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './select';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
 export interface PaginationWithLinksProps {
   pageSizeSelectOptions?: {
@@ -40,24 +40,24 @@ export function PaginationWithLinks({
 
   const buildLink = useCallback(
     (newPage: number) => {
-      const key = pageSearchParam || "page";
+      const key = pageSearchParam || 'page';
       if (!searchParams) return `${pathname}?${key}=${newPage}`;
       const newSearchParams = new URLSearchParams(searchParams);
       newSearchParams.set(key, String(newPage));
       return `${pathname}?${newSearchParams.toString()}`;
     },
-    [searchParams, pathname, pageSearchParam],
+    [searchParams, pathname, pageSearchParam]
   );
 
   const navToPageSize = useCallback(
     (newPageSize: number) => {
-      const key = pageSizeSelectOptions?.pageSizeSearchParam || "pageSize";
+      const key = pageSizeSelectOptions?.pageSizeSearchParam || 'pageSize';
       const newSearchParams = new URLSearchParams(searchParams || undefined);
       newSearchParams.set(key, String(newPageSize));
-      newSearchParams.delete(pageSearchParam || "page"); // Clear the page number when changing page size
+      newSearchParams.delete(pageSearchParam || 'page'); // Clear the page number when changing page size
       router.push(`${pathname}?${newSearchParams.toString()}`);
     },
-    [searchParams, pathname, pageSearchParam, pageSizeSelectOptions?.pageSizeSearchParam, router],
+    [searchParams, pathname, pageSearchParam, pageSizeSelectOptions?.pageSizeSearchParam, router]
   );
 
   const renderPageNumbers = () => {
@@ -71,7 +71,7 @@ export function PaginationWithLinks({
             <PaginationLink href={buildLink(i)} isActive={page === i}>
               {i}
             </PaginationLink>
-          </PaginationItem>,
+          </PaginationItem>
         );
       }
     } else {
@@ -80,14 +80,14 @@ export function PaginationWithLinks({
           <PaginationLink href={buildLink(1)} isActive={page === 1}>
             1
           </PaginationLink>
-        </PaginationItem>,
+        </PaginationItem>
       );
 
       if (page > 3) {
         items.push(
           <PaginationItem key="ellipsis-start">
             <PaginationEllipsis />
-          </PaginationItem>,
+          </PaginationItem>
         );
       }
 
@@ -100,7 +100,7 @@ export function PaginationWithLinks({
             <PaginationLink href={buildLink(i)} isActive={page === i}>
               {i}
             </PaginationLink>
-          </PaginationItem>,
+          </PaginationItem>
         );
       }
 
@@ -108,7 +108,7 @@ export function PaginationWithLinks({
         items.push(
           <PaginationItem key="ellipsis-end">
             <PaginationEllipsis />
-          </PaginationItem>,
+          </PaginationItem>
         );
       }
 
@@ -117,7 +117,7 @@ export function PaginationWithLinks({
           <PaginationLink href={buildLink(totalPageCount)} isActive={page === totalPageCount}>
             {totalPageCount}
           </PaginationLink>
-        </PaginationItem>,
+        </PaginationItem>
       );
     }
 
@@ -135,14 +135,14 @@ export function PaginationWithLinks({
           />
         </div>
       )}
-      <Pagination className={cn({ "md:justify-end": pageSizeSelectOptions })}>
+      <Pagination className={cn({ 'md:justify-end': pageSizeSelectOptions })}>
         <PaginationContent className="max-sm:gap-0">
           <PaginationItem>
             <PaginationPrevious
               href={buildLink(Math.max(page - 1, 1))}
               aria-disabled={page === 1}
               tabIndex={page === 1 ? -1 : undefined}
-              className={page === 1 ? "pointer-events-none opacity-50" : undefined}
+              className={page === 1 ? 'pointer-events-none opacity-50' : undefined}
             />
           </PaginationItem>
           {renderPageNumbers()}
@@ -151,7 +151,7 @@ export function PaginationWithLinks({
               href={buildLink(Math.min(page + 1, totalPageCount))}
               aria-disabled={page === totalPageCount}
               tabIndex={page === totalPageCount ? -1 : undefined}
-              className={page === totalPageCount ? "pointer-events-none opacity-50" : undefined}
+              className={page === totalPageCount ? 'pointer-events-none opacity-50' : undefined}
             />
           </PaginationItem>
         </PaginationContent>

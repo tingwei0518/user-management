@@ -1,9 +1,9 @@
-import React from 'react'
-import { FormLabel, FormMessage } from "@/components/ui/form"
+import React from 'react';
+import { FormLabel, FormMessage } from '@/components/ui/form';
 
 interface FormFieldRowProps {
-  label: string
-  children: React.ReactNode
+  label: string;
+  children: React.ReactNode;
 }
 
 export const FormFieldRow = ({ label, children }: FormFieldRowProps) => (
@@ -14,4 +14,4 @@ export const FormFieldRow = ({ label, children }: FormFieldRowProps) => (
       <FormMessage />
     </div>
   </div>
-) 
+);

@@ -6,4 +6,4 @@ export interface User {
   birthday: Date;
   gender: string;
   occupation: string;
-} 
+}

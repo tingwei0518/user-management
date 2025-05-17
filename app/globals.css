@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -168,7 +168,7 @@ iframe.cloudinary-widget {
 }
 
 /* Modal */
-.user-modal-container [data-slot="card-title"] {
+.user-modal-container [data-slot='card-title'] {
   font-weight: 500 !important;
   font-size: 1.125rem !important;
   line-height: 1.25 !important;

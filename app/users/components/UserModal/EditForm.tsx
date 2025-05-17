@@ -1,24 +1,30 @@
-'use client'
+'use client';
 
-import React, { useEffect } from 'react'
-import axios from 'axios'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import DatePicker from 'react-datepicker'
-import "react-datepicker/dist/react-datepicker.css"
-import { useSearchParams, usePathname, useRouter } from 'next/navigation'
-import { Input } from "@/components/ui/input"
-import { cn } from "@/lib/utils"
-import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form"
-import { Button } from "@/components/ui/button"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { formSchema } from "@/app/lib/validation"
-import { FormFieldRow } from '@/app/users/components/userModal/FormFieldRow'
-import { ProfileImageUpload } from '@/app/users/components/userModal/ProfileImageUpload'
-import { Gender, Occupation, GENDER_LABELS, OCCUPATION_LABELS } from '@/app/types/enums'
-import { User } from '@/app/types/user'
+import React, { useEffect } from 'react';
+import axios from 'axios';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
+import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
+import { Button } from '@/components/ui/button';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { formSchema } from '@/app/lib/validation';
+import { FormFieldRow } from '@/app/users/components/userModal/FormFieldRow';
+import { ProfileImageUpload } from '@/app/users/components/userModal/ProfileImageUpload';
+import { Gender, Occupation, GENDER_LABELS, OCCUPATION_LABELS } from '@/app/types/enums';
+import { User } from '@/app/types/user';
 
 interface EditFormProps {
   onClose: () => void;
@@ -35,14 +41,14 @@ const EditForm = ({ onClose, userData }: EditFormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
+      name: '',
       gender: Gender.MALE,
       birthday: new Date(),
       occupation: Occupation.STUDENT,
-      phone: "",
-      profileImage: "",
+      phone: '',
+      profileImage: '',
     },
-  })
+  });
 
   useEffect(() => {
     if (userData) {
@@ -53,7 +59,7 @@ const EditForm = ({ onClose, userData }: EditFormProps) => {
         birthday: new Date(birthday),
         occupation: occupation as Occupation,
         phone,
-        profileImage: profileImage || "",
+        profileImage: profileImage || '',
       });
     }
   }, [userData, form]);
@@ -136,7 +142,7 @@ const EditForm = ({ onClose, userData }: EditFormProps) => {
                     showYearDropdown
                     dropdownMode="select"
                     className={cn(
-                      "flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      'flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50'
                     )}
                     calendarClassName="rounded-xl border shadow-md p-4 bg-white text-sm"
                     isClearable={false}
@@ -169,7 +175,9 @@ const EditForm = ({ onClose, userData }: EditFormProps) => {
                       </SelectTrigger>
                       <SelectContent>
                         {Object.values(Occupation).map((value) => (
-                          <SelectItem key={value} value={value}>{OCCUPATION_LABELS[value]}</SelectItem>
+                          <SelectItem key={value} value={value}>
+                            {OCCUPATION_LABELS[value]}
+                          </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
@@ -187,7 +195,12 @@ const EditForm = ({ onClose, userData }: EditFormProps) => {
             <FormItem>
               <FormFieldRow label="Phone">
                 <FormControl>
-                  <Input type="tel" placeholder="Enter your phone number" onChange={onChange} value={value} />
+                  <Input
+                    type="tel"
+                    placeholder="Enter your phone number"
+                    onChange={onChange}
+                    value={value}
+                  />
                 </FormControl>
               </FormFieldRow>
             </FormItem>
@@ -201,10 +214,7 @@ const EditForm = ({ onClose, userData }: EditFormProps) => {
             <FormItem>
               <FormFieldRow label="Profile Image">
                 <FormControl>
-                  <ProfileImageUpload
-                    value={value || ''}
-                    onChange={onChange}
-                  />
+                  <ProfileImageUpload value={value || ''} onChange={onChange} />
                 </FormControl>
               </FormFieldRow>
             </FormItem>
@@ -216,7 +226,7 @@ const EditForm = ({ onClose, userData }: EditFormProps) => {
         </div>
       </form>
     </Form>
-  )
-}
+  );
+};
 
-export default EditForm 
+export default EditForm;

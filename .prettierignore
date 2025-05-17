@@ -1,0 +1,14 @@
+# Ignore artifacts:
+node_modules
+.next
+public
+build
+dist
+coverage
+.github
+.idea
+
+# Ignore files
+package-lock.json
+yarn.lock
+*.log 

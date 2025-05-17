@@ -1,13 +1,13 @@
-'use client'
+'use client';
 
-import React, { useState } from 'react'
-import axios from 'axios'
-import { Edit, Trash2 } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import { Button } from "@/components/ui/button"
-import DeleteConfirmation from '@/app/users/components/userLists/DeleteConfirmation'
-import FormModal from '@/app/users/components/userModal/FormModal'
-import { User } from '@/app/types/user'
+import React, { useState } from 'react';
+import axios from 'axios';
+import { Edit, Trash2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import DeleteConfirmation from '@/app/users/components/userLists/DeleteConfirmation';
+import FormModal from '@/app/users/components/userModal/FormModal';
+import { User } from '@/app/types/user';
 interface UserActionButtonsProps {
   userData: User;
 }
@@ -20,27 +20,22 @@ export const UserActionButtons = ({ userData }: UserActionButtonsProps) => {
 
   const handleDelete = () => {
     setIsDeleteModalOpen(true);
-  }
+  };
 
   const confirmDelete = async () => {
     await axios.delete(`/api/users/${userId}`);
     setIsDeleteModalOpen(false);
     refresh();
-  }
+  };
 
   const handleEdit = () => {
     setIsEditModalOpen(true);
-  }
+  };
 
   return (
     <>
       <div className="flex justify-end gap-2">
-        <Button
-          variant="ghost"
-          size="icon"
-          className="h-8 w-8"
-          onClick={handleEdit}
-        >
+        <Button variant="ghost" size="icon" className="h-8 w-8" onClick={handleEdit}>
           <Edit className="h-4 w-4" />
         </Button>
         <Button
@@ -64,7 +59,7 @@ export const UserActionButtons = ({ userData }: UserActionButtonsProps) => {
         userData={userData}
       />
     </>
-  )
-}
+  );
+};
 
-export default UserActionButtons 
+export default UserActionButtons;

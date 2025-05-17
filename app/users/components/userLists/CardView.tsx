@@ -1,16 +1,16 @@
-import React from 'react'
-import { Cake, User as UserIcon } from 'lucide-react'
-import { Card, CardContent } from '@/components/ui/card'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { CardListsProps } from '@/app/users/components/userLists/UserDisplay'
-import UserActionButtons from '@/app/users/components/userLists/UserActionButtons'
-import { OCCUPATION_LABELS, GENDER_LABELS } from '@/app/types/enums'
+import React from 'react';
+import { Cake, User as UserIcon } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { CardListsProps } from '@/app/users/components/userLists/UserDisplay';
+import UserActionButtons from '@/app/users/components/userLists/UserActionButtons';
+import { OCCUPATION_LABELS, GENDER_LABELS } from '@/app/types/enums';
 
 export const CardView = ({ users }: CardListsProps) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       {users.map((user) => {
-        const { id, name, profileImage, phone, gender, occupation, birthday } = user
+        const { id, name, profileImage, phone, gender, occupation, birthday } = user;
         return (
           <Card key={id} className="bg-white border border-gray-200">
             <CardContent className="px-4 py-5 flex flex-col items-center space-y-4">
@@ -39,10 +39,10 @@ export const CardView = ({ users }: CardListsProps) => {
               </div>
             </CardContent>
           </Card>
-        )
+        );
       })}
     </div>
-  )
-}
+  );
+};
 
-export default CardView
+export default CardView;

@@ -1,12 +1,12 @@
-'use client'
+'use client';
 
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { CldUploadWidget } from 'next-cloudinary'
-import { XIcon, ImageIcon } from "lucide-react"
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import { CldUploadWidget } from 'next-cloudinary';
+import { XIcon, ImageIcon } from 'lucide-react';
 interface ProfileImageUploadProps {
-  value: string
-  onChange: (value: string) => void
+  value: string;
+  onChange: (value: string) => void;
 }
 
 export const ProfileImageUpload = ({ value, onChange }: ProfileImageUploadProps) => {
@@ -68,10 +68,8 @@ export const ProfileImageUpload = ({ value, onChange }: ProfileImageUploadProps)
             </Button>
           )}
         </CldUploadWidget>
-        <p className="text-xs text-muted-foreground">
-          Recommended: Square image, max 1MB
-        </p>
+        <p className="text-xs text-muted-foreground">Recommended: Square image, max 1MB</p>
       </div>
     </div>
-  )
-}
+  );
+};

@@ -20,7 +20,7 @@ export const TableView = ({ users }: CardListsProps) => {
         </thead>
         <tbody>
           {users.map((user) => {
-            const { id, name, phone, gender, occupation, birthday } = user
+            const { id, name, phone, gender, occupation, birthday } = user;
             return (
               <tr key={id} className="hover:bg-gray-50 border-b">
                 <td className="px-4 py-4 font-medium">{name}</td>
@@ -36,7 +36,7 @@ export const TableView = ({ users }: CardListsProps) => {
                   <UserActionButtons userData={user} />
                 </td>
               </tr>
-            )
+            );
           })}
         </tbody>
       </table>

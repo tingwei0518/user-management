@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/prisma/client'
-import { userSchema } from '@/app/lib/validation'
+import { NextRequest, NextResponse } from 'next/server';
+import { prisma } from '@/prisma/client';
+import { userSchema } from '@/app/lib/validation';
 
 export async function POST(request: NextRequest) {
   try {
@@ -18,16 +18,13 @@ export async function POST(request: NextRequest) {
         gender,
         birthday: new Date(birthday),
         occupation,
-        profileImage: profileImage || ''
-      }
+        profileImage: profileImage || '',
+      },
     });
 
     return NextResponse.json(user, { status: 201 });
   } catch (error) {
     console.error('Error creating user:', error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
