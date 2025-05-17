@@ -2,7 +2,7 @@ import CreateUserModal from "@/app/users/components/userModal/CreateUserModal";
 import UserLists from "@/app/users/components/userLists/UserLists";
 
 interface HomeProps {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export default function Home({ searchParams }: HomeProps) {

@@ -5,15 +5,15 @@ import UserDisplay from '@/app/users/components/userLists/UserDisplay';
 import { Gender, Occupation } from '@/app/types/enums';
 
 interface UserListsProps {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
-
 const UserLists = async ({ searchParams }: UserListsProps) => {
-  const currentPage = Math.max(1, parseInt(searchParams.page as string) || 1);
+  const params = await searchParams;
+  const currentPage = Math.max(1, parseInt(params.page as string) || 1);
   const PER_PAGE = 6;
   const skip = (currentPage - 1) * PER_PAGE;
 
-  const query = (searchParams.query as string || '').toUpperCase();
+  const query = ((params.query as string) || '').toUpperCase();
 
   const whereConditions = {
     OR: [
