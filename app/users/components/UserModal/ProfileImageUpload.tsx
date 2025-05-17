@@ -1,9 +1,9 @@
 'use client'
 
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { CldUploadWidget } from 'next-cloudinary'
 import { XIcon, ImageIcon } from "lucide-react"
-
 interface ProfileImageUploadProps {
   value: string
   onChange: (value: string) => void
@@ -14,7 +14,7 @@ export const ProfileImageUpload = ({ value, onChange }: ProfileImageUploadProps)
     <div className="flex items-center gap-6">
       <div className="relative flex-shrink-0 w-24 h-24">
         {value ? (
-          <img
+          <Image
             src={value}
             alt="Profile"
             className="w-full h-full object-cover rounded-full border border-border shadow-sm"

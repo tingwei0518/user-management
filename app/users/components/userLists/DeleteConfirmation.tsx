@@ -25,7 +25,7 @@ const DeleteConfirmation = ({ isOpen, onClose, onConfirm, userName }: DeleteConf
           <DialogTitle>Delete User</DialogTitle>
         </DialogHeader>
         <div className="py-4">
-          <p>Are you sure you want to delete the user "{userName}"?</p>
+          <p>Are you sure you want to delete the user: {userName}?</p>
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={onClose}>Cancel</Button>
