@@ -58,9 +58,7 @@ export const ProfileImageUpload = ({ value, onChange }: ProfileImageUploadProps)
               type="button"
               variant="outline"
               className="flex items-center gap-2"
-              onClick={() => {
-                widget?.open();
-              }}
+              onClick={() => widget?.open()}
             >
               <ImageIcon className="h-4 w-4" />
               {value ? 'Change Image' : 'Upload Image'}

@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { Edit, Trash2 } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import DeleteConfirmation from '@/app/users/components/userLists/DeleteConfirmation'
-import UserFormModal from '@/app/users/components/userModal/UserFormModal'
+import FormModal from '@/app/users/components/userModal/FormModal'
 import { User } from '@/app/types/user'
 
 interface UserActionButtonsProps {
@@ -53,7 +53,7 @@ export const UserActionButtons = ({ userData }: UserActionButtonsProps) => {
         onConfirm={confirmDelete}
         userName={userName}
       />
-      <UserFormModal
+      <FormModal
         isOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
         userData={userData}

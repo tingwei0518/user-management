@@ -19,16 +19,19 @@ import { FormFieldRow } from '@/app/users/components/userModal/FormFieldRow'
 import { Gender, Occupation, GENDER_LABELS, OCCUPATION_LABELS } from '@/app/types/enums'
 import { ProfileImageUpload } from '@/app/users/components/userModal/ProfileImageUpload'
 import { User } from '@/app/types/user'
+
 interface EditFormProps {
-  onSave: () => void;
+  onClose: () => void;
   userData?: User;
 }
 
-const EditForm = ({ onSave, userData }: EditFormProps) => {
+const EditForm = ({ onClose, userData }: EditFormProps) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
+
   const isEditMode = !!userData;
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -66,7 +69,7 @@ const EditForm = ({ onSave, userData }: EditFormProps) => {
         replace(`${pathname}?${params.toString()}`);
       }
       form.reset();
-      onSave();
+      onClose();
     } catch (error) {
       console.error('Error saving user:', error);
     }
@@ -198,7 +201,7 @@ const EditForm = ({ onSave, userData }: EditFormProps) => {
         />
 
         <div className="flex justify-end pt-4">
-          <Button type="submit">Save</Button>
+          <Button type="submit">{isEditMode ? 'Save' : 'Create'}</Button>
         </div>
       </form>
     </Form>

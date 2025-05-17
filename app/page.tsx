@@ -1,4 +1,4 @@
-import CreateUserModal from "@/app/users/components/userModal/UserModal";
+import CreateUserModal from "@/app/users/components/userModal/CreateUserModal";
 import UserLists from "@/app/users/components/userLists/UserLists";
 
 interface HomeProps {
