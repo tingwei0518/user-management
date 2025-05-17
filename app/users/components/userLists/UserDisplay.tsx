@@ -8,16 +8,7 @@ import {
 import { CardView } from '@/app/users/components/userLists/CardView'
 import { TableView } from '@/app/users/components/userLists/TableView'
 import SearchBar from '@/app/users/components/userLists/SearchBar'
-
-export interface User {
-  id: number
-  name: string
-  phone: string
-  profileImage: string
-  birthday: Date
-  gender: string
-  occupation: string
-}
+import { User } from '@/app/types/user'
 
 export interface CardListsProps {
   users: User[]

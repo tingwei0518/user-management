@@ -14,7 +14,7 @@ export const CardView = ({ users }: CardListsProps) => {
           <Card key={id} className="bg-white border border-gray-200">
             <CardContent className="px-4 py-5 flex flex-col items-center space-y-4">
               <div className="w-full flex justify-end">
-                <UserActionButtons user={user} />
+                <UserActionButtons userData={user} />
               </div>
               <Avatar className="h-30 w-30 border border-gray-100">
                 <AvatarImage src={profileImage} alt={name} className="object-cover" />

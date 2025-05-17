@@ -11,11 +11,11 @@ import {
 } from "@/components/ui/dialog"
 import EditForm from '@/app/users/components/userModal/EditForm'
 
-const UserModal = () => {
+const CreateUserModal = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen} modal={false}>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button variant="default">Create User</Button>
       </DialogTrigger>
@@ -29,4 +29,4 @@ const UserModal = () => {
   )
 }
 
-export default UserModal
+export default CreateUserModal

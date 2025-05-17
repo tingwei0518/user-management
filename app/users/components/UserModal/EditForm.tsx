@@ -1,12 +1,13 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios'
+import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
+import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 import { Input } from "@/components/ui/input"
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form"
 import { Button } from "@/components/ui/button"
@@ -17,12 +18,17 @@ import { cn } from "@/lib/utils"
 import { FormFieldRow } from '@/app/users/components/userModal/FormFieldRow'
 import { Gender, Occupation, GENDER_LABELS, OCCUPATION_LABELS } from '@/app/types/enums'
 import { ProfileImageUpload } from '@/app/users/components/userModal/ProfileImageUpload'
-
+import { User } from '@/app/types/user'
 interface EditFormProps {
   onSave: () => void;
+  userData?: User;
 }
 
-const EditForm = ({ onSave }: EditFormProps) => {
+const EditForm = ({ onSave, userData }: EditFormProps) => {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const { replace } = useRouter();
+  const isEditMode = !!userData;
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -35,13 +41,34 @@ const EditForm = ({ onSave }: EditFormProps) => {
     },
   })
 
+  useEffect(() => {
+    if (userData) {
+      const { name, gender, birthday, occupation, phone, profileImage } = userData;
+      form.reset({
+        name,
+        gender: gender as Gender,
+        birthday: new Date(birthday),
+        occupation: occupation as Occupation,
+        phone,
+        profileImage: profileImage || "",
+      });
+    }
+  }, [userData, form]);
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      await axios.post('/api/users', values);
+      if (isEditMode) {
+        console.log('Updating user:', { id: userData?.id, ...values });
+      } else {
+        await axios.post('/api/users', values);
+        const params = new URLSearchParams(searchParams);
+        params.set('page', '1');
+        replace(`${pathname}?${params.toString()}`);
+      }
       form.reset();
       onSave();
     } catch (error) {
-      console.error('Error creating user:', error);
+      console.error('Error saving user:', error);
     }
   }
 
@@ -72,6 +99,7 @@ const EditForm = ({ onSave }: EditFormProps) => {
                   <RadioGroup
                     onValueChange={field.onChange}
                     defaultValue={field.value}
+                    value={field.value}
                     className="flex space-x-4"
                   >
                     {Object.values(Gender).map((value) => (
@@ -122,7 +150,7 @@ const EditForm = ({ onSave }: EditFormProps) => {
             <FormItem>
               <FormFieldRow label="Occupation">
                 <FormControl>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select onValueChange={field.onChange} defaultValue={field.value} value={field.value}>
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Select an occupation" />
                     </SelectTrigger>

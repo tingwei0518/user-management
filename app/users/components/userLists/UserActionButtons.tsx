@@ -4,26 +4,27 @@ import React, { useState } from 'react'
 import { Edit, Trash2 } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import DeleteConfirmation from '@/app/users/components/userLists/DeleteConfirmation'
-import { User } from '@/app/users/components/userLists/UserDisplay'
+import UserFormModal from '@/app/users/components/userModal/UserFormModal'
+import { User } from '@/app/types/user'
 
 interface UserActionButtonsProps {
-  user: User
+  userData: User;
 }
 
-export const UserActionButtons = ({ user }: UserActionButtonsProps) => {
-  const { id: userId, name: userName } = user
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+export const UserActionButtons = ({ userData }: UserActionButtonsProps) => {
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  const { name: userName } = userData;
 
   const handleDelete = () => {
-    setIsDeleteModalOpen(true)
+    setIsDeleteModalOpen(true);
   }
 
-  const confirmDelete = () => {
-
-  }
+  const confirmDelete = () => { }
 
   const handleEdit = () => {
-
+    setIsEditModalOpen(true);
   }
 
   return (
@@ -46,12 +47,16 @@ export const UserActionButtons = ({ user }: UserActionButtonsProps) => {
           <Trash2 className="h-4 w-4" />
         </Button>
       </div>
-
       <DeleteConfirmation
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
         onConfirm={confirmDelete}
         userName={userName}
+      />
+      <UserFormModal
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        userData={userData}
       />
     </>
   )

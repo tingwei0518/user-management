@@ -28,7 +28,7 @@ export const TableView = ({ users }: CardListsProps) => {
                 <td className="px-4 py-4 capitalize">{occupation}</td>
                 <td className="px-4 py-4">{phone}</td>
                 <td className="px-4 py-4 text-right">
-                  <UserActionButtons user={user} />
+                  <UserActionButtons userData={user} />
                 </td>
               </tr>
             )
