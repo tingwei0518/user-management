@@ -1,12 +1,13 @@
 'use client'
 
 import React, { useState } from 'react'
+import axios from 'axios'
 import { Edit, Trash2 } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { Button } from "@/components/ui/button"
 import DeleteConfirmation from '@/app/users/components/userLists/DeleteConfirmation'
 import FormModal from '@/app/users/components/userModal/FormModal'
 import { User } from '@/app/types/user'
-
 interface UserActionButtonsProps {
   userData: User;
 }
@@ -14,14 +15,18 @@ interface UserActionButtonsProps {
 export const UserActionButtons = ({ userData }: UserActionButtonsProps) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
-  const { name: userName } = userData;
+  const { refresh } = useRouter();
+  const { name: userName, id: userId } = userData;
 
   const handleDelete = () => {
     setIsDeleteModalOpen(true);
   }
 
-  const confirmDelete = () => { }
+  const confirmDelete = async () => {
+    await axios.delete(`/api/users/${userId}`);
+    setIsDeleteModalOpen(false);
+    refresh();
+  }
 
   const handleEdit = () => {
     setIsEditModalOpen(true);

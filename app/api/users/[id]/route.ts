@@ -24,7 +24,7 @@ export async function PATCH(
 
     const { name, phone, gender, birthday, occupation, profileImage } = result.data;
     const updatedUser = await prisma.user.update({
-      where: { id: parseInt(id) },
+      where: { id: user.id },
       data: {
         name,
         phone,
@@ -43,4 +43,22 @@ export async function PATCH(
       { status: 500 }
     );
   }
+}
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { id } = await params;
+  const user = await prisma.user.findUnique({
+    where: { id: parseInt(id) }
+  });
+
+  if (!user) {
+    return NextResponse.json({ error: "User not found" }, { status: 404 });
+  }
+
+  await prisma.user.delete({ where: { id: user.id } });
+
+  return NextResponse.json({ message: "User deleted successfully" }, { status: 200 });
 }
