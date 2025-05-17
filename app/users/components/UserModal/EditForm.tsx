@@ -61,7 +61,7 @@ const EditForm = ({ onClose, userData }: EditFormProps) => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       if (isEditMode) {
-        console.log('Updating user:', { id: userData?.id, ...values });
+        await axios.patch(`/api/users/${userData?.id}`, values);
       } else {
         await axios.post('/api/users', values);
         const params = new URLSearchParams(searchParams);

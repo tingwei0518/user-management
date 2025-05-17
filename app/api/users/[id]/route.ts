@@ -3,7 +3,10 @@ import { revalidatePath } from 'next/cache'
 import { prisma } from '@/prisma/client'
 import { userSchema } from '@/app/lib/validation'
 
-export async function POST(request: NextRequest) {
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
     const body = await request.json();
     const result = userSchema.safeParse(body);
@@ -11,8 +14,18 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ errors: result.error.errors }, { status: 400 });
     }
 
+    const { id } = await params;
+    const user = await prisma.user.findUnique({
+      where: { id: parseInt(id) }
+    });
+
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
     const { name, phone, gender, birthday, occupation, profileImage } = result.data;
-    const user = await prisma.user.create({
+    const updatedUser = await prisma.user.update({
+      where: { id: parseInt(id) },
       data: {
         name,
         phone,
@@ -25,7 +38,7 @@ export async function POST(request: NextRequest) {
 
     revalidatePath('/');
 
-    return NextResponse.json(user, { status: 201 });
+    return NextResponse.json(updatedUser);
   } catch (error) {
     return NextResponse.json(
       { error: "Internal server error" },
