@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { revalidatePath } from 'next/cache'
 import { prisma } from '@/prisma/client'
 import { userSchema } from '@/app/lib/validation'
 
@@ -22,8 +21,6 @@ export async function POST(request: NextRequest) {
         profileImage: profileImage || ''
       }
     });
-
-    revalidatePath('/');
 
     return NextResponse.json(user, { status: 201 });
   } catch (error) {

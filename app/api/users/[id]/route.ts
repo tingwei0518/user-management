@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { revalidatePath } from 'next/cache'
 import { prisma } from '@/prisma/client'
 import { userSchema } from '@/app/lib/validation'
 
@@ -35,8 +34,6 @@ export async function PATCH(
         profileImage: profileImage || ''
       }
     });
-
-    revalidatePath('/');
 
     return NextResponse.json(updatedUser);
   } catch (error) {

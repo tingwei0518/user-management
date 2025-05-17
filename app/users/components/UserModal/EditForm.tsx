@@ -28,7 +28,7 @@ interface EditFormProps {
 const EditForm = ({ onClose, userData }: EditFormProps) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { replace } = useRouter();
+  const { replace, refresh } = useRouter();
 
   const isEditMode = !!userData;
 
@@ -62,6 +62,7 @@ const EditForm = ({ onClose, userData }: EditFormProps) => {
     try {
       if (isEditMode) {
         await axios.patch(`/api/users/${userData?.id}`, values);
+        refresh();
       } else {
         await axios.post('/api/users', values);
         const params = new URLSearchParams(searchParams);
