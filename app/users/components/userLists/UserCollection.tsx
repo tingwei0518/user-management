@@ -4,10 +4,10 @@ import { prisma } from '@/prisma/client';
 import UserDisplay from '@/app/users/components/UserLists/UserDisplay';
 import { Gender, Occupation } from '@/app/types/enums';
 
-interface UserListsProps {
+interface UserCollectionProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
-const UserLists = async ({ searchParams }: UserListsProps) => {
+const UserCollection = async ({ searchParams }: UserCollectionProps) => {
   const params = await searchParams;
   const currentPage = Math.max(1, parseInt(params.page as string) || 1);
   const PER_PAGE = 6;
@@ -58,4 +58,4 @@ const UserLists = async ({ searchParams }: UserListsProps) => {
   );
 };
 
-export default UserLists;
+export default UserCollection;

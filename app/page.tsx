@@ -1,5 +1,5 @@
 import CreateUserModal from '@/app/users/components/UserModal/CreateUserModal';
-import UserLists from '@/app/users/components/UserLists/UserLists';
+import UserCollection from '@/app/users/components/UserLists/UserCollection';
 
 interface HomeProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -13,7 +13,7 @@ export default function Home({ searchParams }: HomeProps) {
         <CreateUserModal />
       </div>
       <div className="flex-1 h-[calc(100vh-88px)]">
-        <UserLists searchParams={searchParams} />
+        <UserCollection searchParams={searchParams} />
       </div>
     </div>
   );
