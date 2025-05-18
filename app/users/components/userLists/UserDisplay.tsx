@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CardView } from '@/app/users/components/userLists/CardView';
 import { TableView } from '@/app/users/components/userLists/TableView';
 import SearchBar from '@/app/users/components/userLists/SearchBar';
