@@ -1,8 +1,8 @@
 import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { CardView } from '@/app/users/components/userLists/CardView';
-import { TableView } from '@/app/users/components/userLists/TableView';
-import SearchBar from '@/app/users/components/userLists/SearchBar';
+import { CardView } from '@/app/users/components/UserLists/CardView';
+import { TableView } from '@/app/users/components/UserLists/TableView';
+import SearchBar from '@/app/users/components/UserLists/SearchBar';
 import { User } from '@/app/types/user';
 
 export interface CardListsProps {

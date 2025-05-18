@@ -1,7 +1,7 @@
 import React from 'react';
 import { PaginationWithLinks } from '@/components/ui/pagination-with-links';
 import { prisma } from '@/prisma/client';
-import UserDisplay from '@/app/users/components/userLists/UserDisplay';
+import UserDisplay from '@/app/users/components/UserLists/UserDisplay';
 import { Gender, Occupation } from '@/app/types/enums';
 
 interface UserListsProps {

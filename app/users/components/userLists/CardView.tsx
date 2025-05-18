@@ -2,8 +2,8 @@ import React from 'react';
 import { Cake, User as UserIcon } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { CardListsProps } from '@/app/users/components/userLists/UserDisplay';
-import UserActionButtons from '@/app/users/components/userLists/UserActionButtons';
+import { CardListsProps } from '@/app/users/components/UserLists/UserDisplay';
+import UserActionButtons from '@/app/users/components/UserLists/UserActionButtons';
 import { OCCUPATION_LABELS, GENDER_LABELS } from '@/app/types/enums';
 
 export const CardView = ({ users }: CardListsProps) => {

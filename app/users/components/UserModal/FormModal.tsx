@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { XIcon } from 'lucide-react';
-import EditForm from '@/app/users/components/userModal/EditForm';
+import EditForm from '@/app/users/components/UserModal/EditForm';
 import { User } from '@/app/types/user';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 

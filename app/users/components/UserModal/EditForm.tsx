@@ -22,8 +22,8 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { formSchema } from '@/app/lib/validation';
-import { FormFieldRow } from '@/app/users/components/userModal/FormFieldRow';
-import { ProfileImageUpload } from '@/app/users/components/userModal/ProfileImageUpload';
+import { FormFieldRow } from '@/app/users/components/UserModal/FormFieldRow';
+import { ProfileImageUpload } from '@/app/users/components/UserModal/ProfileImageUpload';
 import { Gender, Occupation, GENDER_LABELS, OCCUPATION_LABELS } from '@/app/types/enums';
 import { User } from '@/app/types/user';
 

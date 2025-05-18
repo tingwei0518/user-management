@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import FormModal from '@/app/users/components/userModal/FormModal';
+import FormModal from '@/app/users/components/UserModal/FormModal';
 
 const CreateUserModal = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);

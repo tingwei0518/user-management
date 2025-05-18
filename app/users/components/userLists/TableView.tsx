@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { CardListsProps } from '@/app/users/components/userLists/UserDisplay';
-import UserActionButtons from '@/app/users/components/userLists/UserActionButtons';
+import { CardListsProps } from '@/app/users/components/UserLists/UserDisplay';
+import UserActionButtons from '@/app/users/components/UserLists/UserActionButtons';
 import { OCCUPATION_LABELS, GENDER_LABELS } from '@/app/types/enums';
 
 export const TableView = ({ users }: CardListsProps) => {

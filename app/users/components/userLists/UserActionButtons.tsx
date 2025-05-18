@@ -6,8 +6,8 @@ import { Edit, Trash2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
-import DeleteConfirmation from '@/app/users/components/userLists/DeleteConfirmation';
-import FormModal from '@/app/users/components/userModal/FormModal';
+import DeleteConfirmation from '@/app/users/components/UserLists/DeleteConfirmation';
+import FormModal from '@/app/users/components/UserModal/FormModal';
 import { User } from '@/app/types/user';
 interface UserActionButtonsProps {
   userData: User;

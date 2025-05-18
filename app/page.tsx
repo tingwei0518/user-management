@@ -1,5 +1,5 @@
-import CreateUserModal from '@/app/users/components/userModal/CreateUserModal';
-import UserLists from '@/app/users/components/userLists/UserLists';
+import CreateUserModal from '@/app/users/components/UserModal/CreateUserModal';
+import UserLists from '@/app/users/components/UserLists/UserLists';
 
 interface HomeProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
