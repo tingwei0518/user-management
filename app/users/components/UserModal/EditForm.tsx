@@ -51,6 +51,8 @@ const EditForm = ({ onClose, userData }: EditFormProps) => {
     },
   });
 
+  const { isSubmitting } = form.formState;
+
   useEffect(() => {
     if (userData) {
       const { name, gender, birthday, occupation, phone, profileImage } = userData;
@@ -225,7 +227,9 @@ const EditForm = ({ onClose, userData }: EditFormProps) => {
         />
 
         <div className="flex justify-end pt-4">
-          <Button type="submit">{isEditMode ? 'Save' : 'Create'}</Button>
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? 'Saving...' : (isEditMode ? 'Save' : 'Create')}
+          </Button>
         </div>
       </form>
     </Form>

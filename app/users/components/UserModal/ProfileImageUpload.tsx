@@ -1,9 +1,10 @@
 'use client';
 
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { CldUploadWidget } from 'next-cloudinary';
 import { XIcon, ImageIcon } from 'lucide-react';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+
 interface ProfileImageUploadProps {
   value: string;
   onChange: (value: string) => void;
@@ -12,21 +13,13 @@ interface ProfileImageUploadProps {
 export const ProfileImageUpload = ({ value, onChange }: ProfileImageUploadProps) => {
   return (
     <div className="flex items-center gap-6">
-      <div className="relative flex-shrink-0 w-24 h-24">
-        {value ? (
-          <Image
-            src={value}
-            alt="Profile"
-            width={96}
-            height={96}
-            loading="eager"
-            className="w-full h-full object-cover rounded-full border border-border shadow-sm"
-          />
-        ) : (
-          <div className="w-full h-full rounded-full bg-muted flex items-center justify-center border border-border shadow-sm">
+      <div className="relative flex-shrink-0">
+        <Avatar className="w-24 h-24">
+          <AvatarImage src={value} alt="Profile" />
+          <AvatarFallback className="bg-muted">
             <ImageIcon className="h-12 w-12 text-muted-foreground/25" />
-          </div>
-        )}
+          </AvatarFallback>
+        </Avatar>
         {value && (
           <Button
             type="button"
