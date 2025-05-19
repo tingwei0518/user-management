@@ -44,7 +44,6 @@ The system manages the following user data:
 - Add new users
 - Edit user information
 - Delete users
-- Responsive design, supporting mobile devices
 
 ## Getting Started
 
