@@ -19,6 +19,7 @@ A user management system built with Next.js, integrating Prisma ORM with MySQL d
   - Next.js API Routes
   - Prisma ORM
   - MySQL database
+  - Cloudinary for image storage and management
 
 - **Development Tools**:
   - TypeScript

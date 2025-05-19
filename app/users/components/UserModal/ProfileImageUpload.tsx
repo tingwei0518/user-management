@@ -15,7 +15,7 @@ export const ProfileImageUpload = ({ value, onChange }: ProfileImageUploadProps)
     <div className="flex items-center gap-6">
       <div className="relative flex-shrink-0">
         <Avatar className="w-24 h-24">
-          <AvatarImage src={value} alt="Profile" />
+          <AvatarImage src={value} alt="Profile" className="object-cover" />
           <AvatarFallback className="bg-muted">
             <ImageIcon className="h-12 w-12 text-muted-foreground/25" />
           </AvatarFallback>
