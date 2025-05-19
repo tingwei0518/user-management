@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import DeleteConfirmation from '@/app/users/components/UserLists/DeleteConfirmation';
 import FormModal from '@/app/users/components/UserModal/FormModal';
 import { User } from '@/app/types/user';
+
 interface UserActionButtonsProps {
   userData: User;
 }

@@ -2,9 +2,14 @@ import React from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { CardListsProps } from '@/app/users/components/UserLists/UserDisplay';
 import UserActionButtons from '@/app/users/components/UserLists/UserActionButtons';
+import EmptyState from '@/app/users/components/UserLists/EmptyState';
 import { OCCUPATION_LABELS, GENDER_LABELS } from '@/app/types/enums';
 
 export const TableView = ({ users }: CardListsProps) => {
+  if (!users || users.length === 0) {
+    return <EmptyState />;
+  }
+
   return (
     <ScrollArea className="h-[400px] rounded-md border p-2 bg-white">
       <table className="w-full text-sm">
@@ -27,7 +32,7 @@ export const TableView = ({ users }: CardListsProps) => {
                 <td className="px-4 py-4 capitalize">
                   {GENDER_LABELS[gender as keyof typeof GENDER_LABELS]}
                 </td>
-                <td className="px-4 py-4">{birthday.toLocaleDateString()}</td>
+                <td className="px-4 py-4">{birthday.toLocaleDateString('zh-TW')}</td>
                 <td className="px-4 py-4 capitalize">
                   {OCCUPATION_LABELS[occupation as keyof typeof OCCUPATION_LABELS]}
                 </td>
