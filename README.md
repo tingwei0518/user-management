@@ -27,15 +27,51 @@ A user management system built with Next.js, integrating Prisma ORM with MySQL d
   - Prettier
   - Prisma CLI
 
-## Data Model
+## Project Structure
 
-The system manages the following user data:
-- Name
-- Phone
-- Gender (Male/Female/Other)
-- Birthday
-- Occupation (Student/Engineer/Teacher/Unemployed)
-- Profile Image
+The project follows Next.js 13+ App Router convention with a focus on component organization and UI architecture:
+
+```
+├── app/                           # Next.js App Router directory
+│   ├── api/                      # API Routes
+│   │   └── users/
+│   │       ├── route.ts
+│   │       └── [id]/
+│   │           └── route.ts
+│   │
+│   ├── users/                    # User management feature
+│   │   └── components/          # Feature-specific components
+│   │       ├── UserLists/
+│   │       │   └── ...
+│   │       └── UserModal/
+│   │           └── ...
+│   │
+│   ├── types/
+│   │   ├── enums.ts
+│   │   └── user.ts
+│   │
+│   ├── lib/
+│   │   └── validations.ts      # Form validations
+│   │
+│   ├── layout.tsx
+│   └── page.tsx
+│
+├── components/
+│   └── ui/                      # shadcn/ui components
+│       └── ...
+│
+└── Configuration Files
+    ├── prisma/                 # Database schema
+    │   └── schema.prisma
+    └── ...
+```
+
+Key architectural decisions:
+- **App Router**: Uses Next.js 13+ App Router for server components and API routes
+- **Component Organization**: 
+  - Feature-based components in `app/users/components/`
+  - Reusable UI components from shadcn/ui in `components/ui/`
+- **API Structure**: RESTful API routes with dynamic routes for user operations
 
 ## Features
 
@@ -45,34 +81,12 @@ The system manages the following user data:
 - Edit user information
 - Delete users
 
-## Getting Started
+## Data Model
 
-1. Install dependencies:
-
-```bash
-npm install
-```
-
-2. Set up environment variables:
-Create a `.env` file and add your database connection information:
-
-```
-DATABASE_URL="<username>:<password>@hostname:<port>/<databasename>"
-NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="<Your Cloud Name>"
-```
-
-3. Run database migrations:
-
-```bash
-npx prisma migrate dev
-```
-
-4. Start the development server:
-
-```bash
-npm run dev
-```
-
-Access [http://localhost:3000](http://localhost:3000) to experience the application.
-
-
+The system manages the following user data:
+- Name
+- Phone
+- Gender (Male/Female/Other)
+- Birthday
+- Occupation (Student/Engineer/Teacher/Unemployed)
+- Profile Image
