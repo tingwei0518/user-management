@@ -79,6 +79,7 @@ const EditForm = ({ onClose, userData }: EditFormProps) => {
         replace(`${pathname}?${params.toString()}`);
       }
       toast.success('User saved successfully');
+      form.reset();
       onClose();
     } catch (error) {
       console.error('Error saving user:', error);

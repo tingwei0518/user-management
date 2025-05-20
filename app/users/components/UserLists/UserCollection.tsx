@@ -1,14 +1,12 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { PaginationWithLinks } from '@/components/ui/pagination-with-links';
 import { prisma } from '@/prisma/client';
 import UserDisplay from '@/app/users/components/UserLists/UserDisplay';
-import Loading from '@/app/users/components/UserLists/LoadingSkeleton';
 import { Gender, Occupation } from '@/app/types/enums';
 
 interface UserCollectionProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
-
 const UserCollection = async ({ searchParams }: UserCollectionProps) => {
   const params = await searchParams;
   const currentPage = Math.max(1, parseInt(params.page as string) || 1);
@@ -47,18 +45,16 @@ const UserCollection = async ({ searchParams }: UserCollectionProps) => {
   ]);
 
   return (
-    <Suspense fallback={<Loading />}>
-      <div className="h-[inherit] flex flex-col bg-gray-100">
-        <div className="flex-1 p-6 flex flex-col min-h-0">
-          <UserDisplay users={users} />
-        </div>
-        <div className="flex-none p-4 border-t bg-white">
-          {total > 0 && (
-            <PaginationWithLinks page={currentPage} totalCount={total} pageSize={PER_PAGE} />
-          )}
-        </div>
+    <div className="h-[inherit] flex flex-col bg-gray-100">
+      <div className="flex-1 p-6 flex flex-col min-h-0">
+        <UserDisplay users={users} />
       </div>
-    </Suspense>
+      <div className="flex-none p-4 border-t bg-white">
+        {total > 0 && (
+          <PaginationWithLinks page={currentPage} totalCount={total} pageSize={PER_PAGE} />
+        )}
+      </div>
+    </div>
   );
 };
 
